@@ -20,6 +20,6 @@ import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
  *  extends: { "☢": "nuclear" },
  * }); // some-fUNkY-and-nuclear-string
  */
-export const slugify = (str: string, options?: string | object) => {
+export const slugify = (str: string, options?: string | object): string => {
   return slug(str, options);
 };
