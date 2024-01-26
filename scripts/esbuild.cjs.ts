@@ -1,17 +1,25 @@
 // Build Node.js CommonJS module with esbuild.
-import { build } from "npm:esbuild@0.19.11";
+import { build, stop } from "https://deno.land/x/esbuild@v0.19.12/mod.js";
 import { transformExtPlugin } from "npm:@gjsify/esbuild-plugin-transform-ext@0.0.4";
-import { extname, join } from "https://deno.land/std@0.212.0/path/mod.ts";
+import { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.5/mod.ts";
+import {
+  extname,
+  join,
+  resolve,
+} from "https://deno.land/std@0.212.0/path/mod.ts";
 
 const OUTDIR = "./dist/cjs";
 
 await build({
   plugins: [
-    transformExtPlugin({ outExtension: { ".ts": ".cjs", ".js": ".cjs" } }),
+    ...denoPlugins({ configPath: resolve("./deno.json") }),
+    transformExtPlugin(
+      { outExtension: { ".ts": ".cjs", ".js": ".cjs" } },
+    ),
   ],
   entryPoints: ["./src/index.ts", "./src/**/*.ts"],
   outdir: OUTDIR,
-  bundle: false,
+  bundle: true,
   platform: "node",
   target: "node16",
   format: "cjs",
@@ -31,3 +39,5 @@ async function renameExtensions(directory: string) {
 }
 
 await renameExtensions(OUTDIR);
+
+stop();
