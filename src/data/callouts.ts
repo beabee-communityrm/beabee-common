@@ -8,6 +8,12 @@ export interface BaseCalloutComponentSchema {
   [key: string]: unknown;
 }
 
+export interface ContentCalloutComponentSchema
+  extends BaseCalloutComponentSchema {
+  type: "content";
+  input: false;
+}
+
 export interface NestableCalloutComponentSchema
   extends BaseCalloutComponentSchema {
   type: "panel" | "well" | "tabs";
@@ -45,6 +51,7 @@ export interface RadioCalloutComponentSchema
 }
 
 export type CalloutComponentSchema =
+  | ContentCalloutComponentSchema
   | SelectCalloutComponentSchema
   | RadioCalloutComponentSchema
   | InputCalloutComponentSchema
