@@ -27,12 +27,18 @@ export interface InputCalloutComponentSchema
     | "address"
     | "button"
     | "checkbox"
+    | "currency"
+    | "datetime"
     | "email"
     | "file"
     | "number"
     | "password"
+    | "phoneNumber"
+    | "signature"
     | "textfield"
-    | "textarea";
+    | "textarea"
+    | "time"
+    | "url";
   input: true;
 }
 
