@@ -191,3 +191,4 @@ export * from "./callouts";
 export * from "./contacts";
 export * from "./notices";
 export * from "./payments";
+export * from "./segments";
