@@ -1,6 +1,5 @@
 import {
   CalloutComponentSchema,
-  CalloutFormSchema,
   CalloutResponseAnswer,
   NestableCalloutComponentSchema,
 } from "../data/callouts";
@@ -102,8 +101,12 @@ export function filterComponents(
   });
 }
 
+interface SimpleCalloutFormSchema {
+  slides: { id: string; components: CalloutComponentSchema[] }[];
+}
+
 export function getCalloutComponents(
-  formSchema: CalloutFormSchema
+  formSchema: SimpleCalloutFormSchema
 ): (CalloutComponentSchema & { slideId: string; fullKey: string })[] {
   return formSchema.slides.flatMap((slide) =>
     flattenComponents(slide.components).map((component) => ({
@@ -115,7 +118,7 @@ export function getCalloutComponents(
 }
 
 export function getCalloutFilters(
-  formSchema: CalloutFormSchema
+  formSchema: SimpleCalloutFormSchema
 ): Record<string, FilterArgs & { label: string }> {
   const items = getCalloutComponents(formSchema)
     .filter((c) => c.input)
