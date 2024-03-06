@@ -63,22 +63,33 @@ export type CalloutComponentSchema =
   | InputCalloutComponentSchema
   | NestableCalloutComponentSchema;
 
-export interface CalloutNavigationSchema {
-  prevText: string;
-  nextText: string;
+export interface SetCalloutNavigationSchema {
   nextSlideId: string;
-  submitText: string;
 }
 
-export interface CalloutSlideSchema {
+export interface SetCalloutSlideSchema {
   id: string;
   title: string;
   components: CalloutComponentSchema[];
-  navigation: CalloutNavigationSchema;
+  navigation: SetCalloutNavigationSchema;
 }
 
-export interface CalloutFormSchema {
-  slides: CalloutSlideSchema[];
+export interface SetCalloutFormSchema {
+  slides: SetCalloutSlideSchema[];
+}
+
+export interface GetCalloutNavigationSchema extends SetCalloutNavigationSchema {
+  prevText: string;
+  nextText: string;
+  submitText: string;
+}
+
+export interface GetCalloutSlideSchema extends SetCalloutSlideSchema {
+  navigation: GetCalloutNavigationSchema;
+}
+
+export interface GetCalloutFormSchema extends SetCalloutFormSchema {
+  slides: GetCalloutSlideSchema[];
 }
 
 export interface CalloutResponseAnswerAddress {

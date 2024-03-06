@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import {
-  CalloutFormSchema,
+  GetCalloutFormSchema,
   CalloutResponseAnswers,
   stringifyAnswer,
   InputCalloutComponentSchema,
@@ -90,7 +90,7 @@ const answers: CalloutResponseAnswers = {
   },
 };
 
-const formSchema: CalloutFormSchema = {
+const formSchema: GetCalloutFormSchema = {
   slides: [
     {
       id: "slide1",
