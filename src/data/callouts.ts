@@ -3,6 +3,8 @@ export interface BaseCalloutComponentSchema {
   type: string;
   key: string;
   label?: string;
+  description?: string;
+  placeholder?: string;
   input?: boolean;
   adminOnly?: boolean;
   [key: string]: unknown;
