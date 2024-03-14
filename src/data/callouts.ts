@@ -92,6 +92,7 @@ export interface GetCalloutSlideSchema extends SetCalloutSlideSchema {
 
 export interface GetCalloutFormSchema extends SetCalloutFormSchema {
   slides: GetCalloutSlideSchema[];
+  componentText: Record<string, string>;
 }
 
 export interface CalloutResponseAnswerAddress {

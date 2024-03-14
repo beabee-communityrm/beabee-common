@@ -110,6 +110,7 @@ const formSchema: GetCalloutFormSchema = {
       },
     },
   ],
+  componentText: {},
 };
 
 describe("stringifyAnswers should show a nice answer for", () => {
