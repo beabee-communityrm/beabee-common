@@ -4,13 +4,17 @@ import type {
   GetCalloutFormData,
   GetCalloutWith,
   Noop,
+  CalloutVariantData,
 } from "./index.ts";
 
-export type GetCalloutDataWith<With extends GetCalloutWith> =
-  & GetCalloutData
-  & ("responseCount" extends With ? { responseCount: number } : Noop)
-  & ("hasAnswered" extends With ? { hasAnswered: boolean } : Noop)
-  & ("responseViewSchema" extends With
+export type GetCalloutDataWith<With extends GetCalloutWith> = GetCalloutData &
+  ('form' extends With ? GetCalloutFormData : Noop) &
+  ('hasAnswered' extends With ? { hasAnswered: boolean } : Noop) &
+  ('responseCount' extends With ? { responseCount: number } : Noop) &
+  ('responseViewSchema' extends With
     ? { responseViewSchema: CalloutResponseViewSchema | null }
-    : Noop)
-  & ("form" extends With ? GetCalloutFormData : Noop);
+    : Noop) &
+  ('variantNames' extends With ? { variantNames: string[] } : Noop) &
+  ('variants' extends With
+    ? { variants: Record<string, CalloutVariantData> }
+    : Noop);
