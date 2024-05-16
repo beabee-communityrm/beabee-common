@@ -30,11 +30,17 @@ export function calcPaymentFee(
   feeable: Feeable,
   country: StripeFeeCountry,
 ): number {
-  const feeFn = feeable.paymentMethod === PaymentMethod.GoCardlessDirectDebit
-    ? gcFee
-    : stripeFees[country][feeable.paymentMethod];
+  if (feeable.period === ContributionPeriod.Annually) {
+    return 0;
+  }
 
-  return feeable.period === ContributionPeriod.Annually
-    ? 0
-    : feeFn(feeable.amount);
+  switch (feeable.paymentMethod) {
+    case PaymentMethod.None:
+    case PaymentMethod.Manual:
+      return 0;
+    case PaymentMethod.GoCardlessDirectDebit:
+      return gcFee(feeable.amount);
+    default:
+      return stripeFees[country][feeable.paymentMethod](feeable.amount);
+  }
 }

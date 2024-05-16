@@ -1,5 +1,9 @@
 import { assertEquals } from "https://deno.land/std@0.212.0/assert/assert_equals.ts";
-import { ContributionPeriod, calcPaymentFee, PaymentMethod } from "../../mod.ts";
+import {
+  calcPaymentFee,
+  ContributionPeriod,
+  PaymentMethod,
+} from "../../mod.ts";
 
 Deno.test("calcPaymentFee returns correct fee", async (t) => {
   await t.step(
@@ -26,6 +30,8 @@ Deno.test("calcPaymentFee returns correct fee", async (t) => {
       const country = "gb";
 
       const expectedFees = {
+        [PaymentMethod.None]: 0,
+        [PaymentMethod.Manual]: 0,
         [PaymentMethod.StripeCard]: 0.2 + 0.015 * 100,
         [PaymentMethod.StripeSEPA]: 0.3,
         [PaymentMethod.StripeBACS]: 0.2,
